@@ -1,0 +1,96 @@
+body {
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.5vw;
+}
+#body-calculator {
+    background-color: #8f8f8f;
+    border-radius: 8px;
+    padding: 1vw;
+    display: grid;
+    grid-template-areas: 
+    'screen screen screen screen'
+    'clear clear clear clear'
+    ;
+    grid-template-rows: 2fr 0.4fr 1fr 1fr 1fr 1fr;
+    height: 50vh;
+    width: 40vh;
+}
+
+#screen {
+    display: flex;
+    flex-direction: column;
+    grid-area: screen;
+    margin-bottom: 1.2vh;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 0.2vw solid rgb(94, 94, 94);
+    padding: 0.2vw;
+}
+
+#screen01, #screen02 {
+    text-align: right;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#screen01 {
+    grid-area: screen01;
+    font-size: 1vw;
+    text-align: right;
+    flex: 1 1 0;
+}
+#screen02 {
+    grid-area: screen02;
+    font-size: 2vw;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+#reset {
+    display: flex;
+    grid-area: clear;
+    max-width: 4.3vw;
+    max-height: 2vh;
+    font-size: 0.7vw;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 0.2vw solid rgb(94, 94, 94);
+}
+
+.button, #result {
+    box-sizing: border-box;
+    border: 0.1vw solid rgb(94, 94, 94);
+}
+
+#one, #two, #three, #four {
+    box-sizing: border-box;
+    border-top: 0.2vw solid rgb(94, 94, 94);
+}
+
+#four, #eight, #result, #plus {
+    box-sizing: border-box;
+    border-right: 0.2vw solid rgb(94, 94, 94);
+}
+
+#result, #div, #mult, #minus {
+    box-sizing: border-box;
+    border-bottom: 0.2vw solid rgb(94, 94, 94);
+}
+
+#minus, #nine, #five, #one {
+    box-sizing: border-box;
+    border-left: 0.2vw solid rgb(94, 94, 94);
+}
