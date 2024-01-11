@@ -203,10 +203,6 @@ function result() {
     solved = conta[0].toFixed(3);
     }else {solved = conta[0]};
 
-    if(solved == 4){
-        solved = 5;
-    }
-
     document.getElementById("screen02").textContent = solved;
 
 }
