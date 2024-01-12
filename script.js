@@ -2,6 +2,9 @@ let calculus = [];
 let x = 0;
 let buttonPressed = 0;
 let buttonPressed02 = 0;
+let buttonPressed03 = 0;
+let buttonPressed04 = 0;
+let buttonPressedMaster = 0;
 let dot = 0;
 
 
@@ -14,13 +17,17 @@ Array.from(buttons).forEach(button => {
 
 function doStuff() {
     var value = this.getAttribute('value');
-
     if (value == 'reset'){
         location.reload();
     }
 
+    if(buttonPressedMaster != 0){
+        return;
+    }else {
+
     if (this.classList.contains('num') == true){     
         buttonPressed02 = 0;                       //NUMBERS
+        buttonPressed04 = 1;
         function showScreen02() {
             let screen = document.getElementById('screen02');
             let text = document.createTextNode(value);
@@ -36,7 +43,7 @@ function doStuff() {
         
             calculus[x] =  calculus[x] + value;
             console.log(calculus);
-
+            buttonPressed03 = 1;
             return;
         }
     showScreen02();
@@ -50,6 +57,7 @@ function doStuff() {
         screen02.textContent = "0";
         
         buttonPressed = 0;
+        buttonPressed04 = 0;
 
         if(buttonPressed02 == 0){
             buttonPressed02 = 1;
@@ -57,33 +65,65 @@ function doStuff() {
 
         const value = this.getAttribute('value');
         
-        if(value == '+'){
-            screen01.appendChild(document.createTextNode(' + '));
-            x++;
-            calculus[x] = value;
-            console.log(calculus);
-            x++;
-
-        } else if(value == '-'){
+        if(value == '-'){
             screen01.appendChild(document.createTextNode(' - '));
+            if(buttonPressed03 == 0){
+                calculus[x] = 0;
+                x++;
+                calculus[x] = value;
+            console.log(calculus);
             x++;
+                }else {
+                    x++;
             calculus[x] = value;
             console.log(calculus);
             x++;
+                }
+
+        } else if(value == '+'){
+            screen01.appendChild(document.createTextNode(' + '));
+            if(buttonPressed03 == 0){
+                calculus[x] = 0;
+                x++;
+                calculus[x] = value;
+            console.log(calculus);
+            x++;
+                }else{
+                    x++;
+            calculus[x] = value;
+            console.log(calculus);
+            x++;
+                }
 
         }else if(value == '*'){
             screen01.appendChild(document.createTextNode(' x '));
+            if(buttonPressed03 == 0){
+                calculus[x] = 0;
+                x++;
+                calculus[x] = value;
+            console.log(calculus);
             x++;
+                }else{
+                x++;
             calculus[x] = value;
             console.log(calculus);
             x++;
+                }
 
         }else if(value == '/'){
             screen01.appendChild(document.createTextNode(' ÷ '));
+            if(buttonPressed03 == 0){
+            calculus[x] = 0;
             x++;
             calculus[x] = value;
             console.log(calculus);
             x++;
+            }else {
+                x++;
+            calculus[x] = value;
+            console.log(calculus);
+            x++;
+            }
 
         }
         } else {
@@ -92,10 +132,12 @@ function doStuff() {
             console.log(calculus);
         }
         return;
+    }
 
     }
 
     if(this.classList.contains('dot') == true){
+        buttonPressed04 = 0;
         if(dot != 0){
             return;
         }else {
@@ -128,6 +170,10 @@ return;
 function result() {
     const screen02 = document.getElementById('screen02');
     const screen01 = document.getElementById('screen01');
+    buttonPressedMaster = 1;
+    if(buttonPressed04 == 0){
+        return;
+    }else{
 
     screen01.appendChild(document.createTextNode(screen02.textContent));
     screen02.textContent = "0";
@@ -169,21 +215,6 @@ function result() {
         }
 
     }
-    while(conta.findIndex(y => y == '+') != -1){
-        let sym = conta.findIndex(y => y == '+');
-        let num1 = conta[sym - 1];
-        let num2 = conta [sym + 1];
-        conta.splice(sym-1, 1, (num1+num2));
-        conta.splice(sym, 1);
-        conta.splice(sym, 1);
-
-        console.log(conta, 'sum');
-        if(conta.length == 2){
-            conta.pop();
-            console.log(conta);
-        }
-
-    }
     while(conta.findIndex(y => y == '-') != -1){
         let sym = conta.findIndex(y => y == '-');
         let num1 = conta[sym - 1];
@@ -199,10 +230,30 @@ function result() {
         }
 
     }
-    if(conta[0] % 1 != 0){
-    solved = conta[0].toFixed(3);
-    }else {solved = conta[0]};
+    while(conta.findIndex(y => y == '+') != -1){
+        let sym = conta.findIndex(y => y == '+');
+        let num1 = conta[sym - 1];
+        let num2 = conta [sym + 1];
+        conta.splice(sym-1, 1, (num1+num2));
+        conta.splice(sym, 1);
+        conta.splice(sym, 1);
+
+        console.log(conta, 'add');
+        if(conta.length == 2){
+            conta.pop();
+            console.log(conta);
+        }
+
+    }
+
+    solved = conta[0];
+    solved = Math.round(solved * 1000000000) / 1000000000;
 
     document.getElementById("screen02").textContent = solved;
+    console.log(typeof solved);
 
-}
+    buttonPressed04 = 0;
+
+    return;
+
+}}

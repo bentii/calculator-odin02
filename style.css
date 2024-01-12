@@ -28,12 +28,14 @@ body {
     border-radius: 5px;
     border: 0.3rem solid rgb(94, 94, 94);
     padding: 0.5rem;
+    overflow: auto;
 }
 
 #screen01, #screen02 {
     text-align: right;
     overflow: auto;
     white-space: nowrap;
+    overflow: auto;
 }
 
 #screen01 {
